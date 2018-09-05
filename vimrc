@@ -63,6 +63,19 @@ let NERDTreeShowBookmarks=1
 let NERDTreeWinPos = "right"
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+"  remove unwanted whitespace
+"  However, this has minor side-effects, such as influencing undo history 
+"  and sometimes changing scroll position.
+"  http://vim.wikia.com/wiki/Remove_unwanted_spaces
+function StripTrailingWhitespace()
+	if !&binary && &filetype != 'diff'
+		normal mz
+		normal Hmy
+		%s/\s\+$//e
+		normal 'yz<CR>
+		normal `z
+	endif
+endfunction
 
 " keybindings for plugin toggle
 nmap <F6> :NERDTreeToggle<cr>
