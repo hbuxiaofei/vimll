@@ -39,12 +39,9 @@ set t_ti= t_te=
 " always show the status line - use 2 lines for the status bar
 set laststatus=2
 
-" neoComplCache 
-" 在系统启动的时候启动
+" neocomplcache
 let g:neocomplcache_enable_at_startup = 1
-" 提示的时候默认选择地一个
 let g:neocomplcache_enable_auto_select = 1
-
 
 " tagbar
 let g:tagbar_left=1
@@ -52,22 +49,26 @@ let g:tagbar_width=30
 let g:tagbar_sort = 0
 let g:tagbar_compact = 1
 
-
-" nerd Tree
+" nerdtree
 let NERDChristmasTree=0
 let NERDTreeWinSize=30
 let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
-" let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
 let NERDTreeShowBookmarks=1
 let NERDTreeWinPos = "right"
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+" airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+
 "  remove unwanted whitespace
-"  However, this has minor side-effects, such as influencing undo history 
-"  and sometimes changing scroll position.
 "  http://vim.wikia.com/wiki/Remove_unwanted_spaces
-function StripTrailingWhitespace()
+"  However, this has minor side-effects, such as influencing undo history
+"  and sometimes changing scroll position.
+function! StripTrailingWhitespace()
 	if !&binary && &filetype != 'diff'
 		normal mz
 		normal Hmy
@@ -76,6 +77,7 @@ function StripTrailingWhitespace()
 		normal `z
 	endif
 endfunction
+autocmd BufWritePre * call StripTrailingWhitespace()
 
 " keybindings for plugin toggle
 nmap <F6> :NERDTreeToggle<cr>

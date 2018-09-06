@@ -8,17 +8,10 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 
-
-"------------------
-" Code Completions
-"------------------
 Bundle 'Shougo/neocomplcache'
-
-"--------------
-"" IDE features
-"--------------
 Bundle 'scrooloose/nerdtree'
 Bundle 'majutsushi/tagbar'
+Bundle 'vim-airline/vim-airline'
 
 filetype plugin indent on     " required!
 
