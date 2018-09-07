@@ -76,19 +76,18 @@ function! ReplaceTab()
 	endif
 endfunction
 
-"  remove unwanted whitespace
-"  http://vim.wikia.com/wiki/Remove_unwanted_spaces
-"  However, this has minor side-effects, such as influencing undo history
-"  and sometimes changing scroll position.
+" remove unwanted whitespace
+" https://github.com/spf13/spf13-vim.git
 function! StripTrailingWhitespace()
-	if !&binary && &filetype != 'diff'
-		normal mz
-		normal Hmy
-		%s/\s\+$//e
-		normal 'yz<CR>
-		normal `z
-	endif
+	" Preparation: save last search, and cursor position.
+	let _s=@/
+	let l = line(".")
+	let c = col(".")
+	" do the business:
+	%s/\s\+$//e
+	" clean up: restore previous search history, and cursor position
+	let @/=_s
+	call cursor(l, c)
 endfunction
 autocmd BufWritePre * call StripTrailingWhitespace()
-
 
