@@ -12,6 +12,8 @@ Bundle 'Shougo/neocomplcache'
 Bundle 'scrooloose/nerdtree'
 Bundle 'majutsushi/tagbar'
 Bundle 'vim-airline/vim-airline'
+Bundle 'rking/ag.vim'
+Bundle 'ctrlpvim/ctrlp.vim'
 
 filetype plugin indent on     " required!
 

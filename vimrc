@@ -15,6 +15,7 @@ set tabstop=4       " tab width
 set softtabstop=4   " backspace
 set shiftwidth=4    " indent width
 set expandtab       " use space when <Tab>
+set colorcolumn=80
 
 
 " encoding dectection
@@ -48,6 +49,7 @@ let g:tagbar_left=1
 let g:tagbar_width=30
 let g:tagbar_sort = 0
 let g:tagbar_compact = 1
+nmap <F7> :TagbarToggle<cr>
 
 " nerdtree
 let NERDChristmasTree=0
@@ -57,12 +59,22 @@ let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 let NERDTreeShowBookmarks=1
 let NERDTreeWinPos = "right"
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+nmap <F6> :NERDTreeToggle<cr>
 
 " airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
+nmap <leader>- <Plug>AirlineSelectPrevTab
+nmap <leader>+ <Plug>AirlineSelectNextTab
+
+" ctrlp
+let g:ctrlp_match_window = 'min:1,max:15,results:100'
+
+function! ReplaceTab()
+	if !&binary && &filetype != 'diff'
+		:%ret! 4
+	endif
+endfunction
 
 "  remove unwanted whitespace
 "  http://vim.wikia.com/wiki/Remove_unwanted_spaces
@@ -79,7 +91,4 @@ function! StripTrailingWhitespace()
 endfunction
 autocmd BufWritePre * call StripTrailingWhitespace()
 
-" keybindings for plugin toggle
-nmap <F6> :NERDTreeToggle<cr>
-nmap <F7> :TagbarToggle<cr>
 
