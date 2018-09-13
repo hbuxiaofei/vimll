@@ -7,6 +7,7 @@ set number
 set hlsearch
 set ignorecase
 set smartcase
+set incsearch
 
 " indentation
 set autoindent
@@ -49,6 +50,7 @@ let g:tagbar_left=1
 let g:tagbar_width=30
 let g:tagbar_sort = 0
 let g:tagbar_compact = 1
+autocmd VimEnter * nested :TagbarOpen
 nmap <F7> :TagbarToggle<cr>
 
 " nerdtree
