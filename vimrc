@@ -77,6 +77,9 @@ let g:indentLine_enable = 1
 let g:indentLine_char = '|'
 let g:indentLine_color_term = 239
 
+" nerdcommenter
+let g:NERDSpaceDelims = 1
+
 function! ReplaceTab()
 	if !&binary && &filetype != 'diff'
 		:%ret! 4
