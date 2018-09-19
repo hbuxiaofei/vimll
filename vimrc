@@ -50,7 +50,6 @@ let g:tagbar_left=1
 let g:tagbar_width=30
 let g:tagbar_sort = 0
 let g:tagbar_compact = 1
-autocmd VimEnter * nested :TagbarOpen
 nmap <F7> :TagbarToggle<cr>
 
 " nerdtree
@@ -92,4 +91,6 @@ function! StripTrailingWhitespace()
 	call cursor(l, c)
 endfunction
 autocmd BufWritePre * call StripTrailingWhitespace()
+
+autocmd BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
