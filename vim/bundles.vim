@@ -8,6 +8,7 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 
+Bundle 'll.vim'
 Bundle 'Shougo/neocomplcache'
 Bundle 'scrooloose/nerdtree'
 Bundle 'majutsushi/tagbar'
