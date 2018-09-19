@@ -69,6 +69,7 @@ nmap <leader>- <Plug>AirlineSelectPrevTab
 nmap <leader>+ <Plug>AirlineSelectNextTab
 
 " ctrlp
+let g:ctrlp_working_path_mode = 'wa'
 let g:ctrlp_match_window = 'min:1,max:15,results:100'
 
 " indentLine
