@@ -15,7 +15,7 @@ Bundle 'majutsushi/tagbar'
 Bundle 'vim-airline/vim-airline'
 Bundle 'rking/ag.vim'
 Bundle 'ctrlpvim/ctrlp.vim'
-Bundle 'Yggdroot/indentLine.vim'
+Bundle 'Yggdroot/indentLine'
 
 filetype plugin indent on     " required!
 
