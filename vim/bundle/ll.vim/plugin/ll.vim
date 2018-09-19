@@ -12,7 +12,7 @@ function! AutoSetFileHead()
 endfunction
 
 if ((filereadable("Kconfig"))&&(filereadable("Makefile")))
-    if  &filetype == 'c' || &filetype == 'cpp'
+    if &filetype == 'c' || &filetype == 'cpp'
         set tabstop=8
         set softtabstop=8
         set shiftwidth=8

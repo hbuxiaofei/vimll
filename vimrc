@@ -71,6 +71,11 @@ nmap <leader>+ <Plug>AirlineSelectNextTab
 " ctrlp
 let g:ctrlp_match_window = 'min:1,max:15,results:100'
 
+" indentLine
+let g:indentLine_enable = 1
+let g:indentLine_char = '|'
+let g:indentLine_color_term = 239
+
 function! ReplaceTab()
 	if !&binary && &filetype != 'diff'
 		:%ret! 4
