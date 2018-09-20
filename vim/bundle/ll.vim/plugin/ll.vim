@@ -2,7 +2,7 @@ autocmd BufNewFile *.sh,*.py exec ":call AutoSetFileHead()"
 function! AutoSetFileHead()
     if &filetype == 'sh'
         call setline(1, "\#!/bin/bash")
-    elseif $filetype == 'python'
+    elseif &filetype == 'python'
         call setline(1, "\#!/usr/bin/env python")
 	call append(1, "\# -*- coding: utf-8 -*-")
     endif
