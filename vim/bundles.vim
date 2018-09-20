@@ -17,6 +17,7 @@ Bundle 'rking/ag.vim'
 Bundle 'ctrlpvim/ctrlp.vim'
 Bundle 'Yggdroot/indentLine'
 Bundle 'scrooloose/nerdcommenter'
+Bundle 'vim-scripts/DoxygenToolkit.vim'
 
 filetype plugin indent on     " required!
 

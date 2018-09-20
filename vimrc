@@ -80,6 +80,9 @@ let g:indentLine_color_term = 239
 " nerdcommenter
 let g:NERDSpaceDelims = 1
 
+" doxygentoolkit
+let g:DoxygenToolkit_briefTag_funcName = "yes"
+
 function! ReplaceTab()
 	if !&binary && &filetype != 'diff'
 		:%ret! 4
