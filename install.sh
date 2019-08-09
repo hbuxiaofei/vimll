@@ -2,12 +2,12 @@
 
 cd $(dirname $0)
 
-if [ -f /etc/vim/vimrc ] && [ ! -f /etc/vim/vimrc.bak]; then
+if [ -f /etc/vim/vimrc ] && [ ! -f /etc/vim/vimrc.bak ]; then
     mv /etc/vim/vimrc /etc/vim/vimrc.bak
     touch /etc/vim/vimrc
 fi
 
-if [ -f /etc/vimrc ] && [ ! -f /etc/vimrc.bak]; then
+if [ -f /etc/vimrc ] && [ ! -f /etc/vimrc.bak ]; then
     mv /etc/vimrc /etc/vimrc.bak
     touch /etc/vimrc
 fi
