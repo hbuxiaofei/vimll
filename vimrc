@@ -17,6 +17,7 @@ set softtabstop=4   " backspace
 set shiftwidth=4    " indent width
 set expandtab       " use space when <Tab>
 set colorcolumn=80
+set backspace=indent,eol,start
 
 
 " encoding dectection
@@ -43,7 +44,7 @@ set laststatus=2
 
 " neocomplcache
 let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_auto_select = 1
+let g:neocomplcache_enable_auto_select = 0
 
 " tagbar
 let g:tagbar_left=1
@@ -66,7 +67,8 @@ nmap <F6> :NERDTreeToggle<cr>
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 nmap <leader>- <Plug>AirlineSelectPrevTab
-nmap <leader>+ <Plug>AirlineSelectNextTab
+nmap <leader>= <Plug>AirlineSelectNextTab
+nmap <Leader>+ :bd<cr>
 
 " ctrlp
 let g:ctrlp_working_path_mode = 'wa'
