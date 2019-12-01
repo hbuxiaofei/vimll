@@ -31,7 +31,7 @@ endif
 function s:windowdir()
   if winbufnr(0) == -1
     let unislash = getcwd()
-  else 
+  else
     let unislash = fnamemodify(bufname(winbufnr(0)), ':p:h')
   endif
     return tr(unislash, '\', '/')
@@ -60,6 +60,26 @@ function s:Find_in_parent(fln,flsrt,flstp)
   endwhile
   return "Nothing"
 endfunc
+
+if !exists("g:is_autoloadcs_quickfix_open")
+    let s:is_autoloadcs_quickfix_open = 0
+endif
+
+function s:AutoloadcsQuickfixOpen()
+    cwindow
+    let s:is_autoloadcs_quickfix_open = 1
+endfunction
+
+function AutoloadcsQuickfixToggle()
+    if s:is_autoloadcs_quickfix_open == 1
+        cclose
+        let s:is_autoloadcs_quickfix_open = 0
+    else
+        cwindow
+        let s:is_autoloadcs_quickfix_open = 1
+    endif
+endfunction
+
 "
 "==
 " Cycle_macros_menus
@@ -78,14 +98,14 @@ function s:Cycle_macros_menus()
     let s:menus_loaded = 1
     set csto=0
     set cst
-    silent! map <unique> <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-    silent! map <unique> <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-    silent! map <unique> <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-    silent! map <unique> <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-    silent! map <unique> <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-    silent! map <unique> <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-    silent! map <unique> <C-\>f :cs find f <C-R>=expand("<cword>")<CR><CR>
-    silent! map <unique> <C-\>i :cs find i <C-R>=expand("<cword>")<CR><CR>
+    silent! map <unique> <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR><CR>:call <SID>AutoloadcsQuickfixOpen()<CR>
+    silent! map <unique> <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR><CR>:call <SID>AutoloadcsQuickfixOpen()<CR>
+    silent! map <unique> <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR><CR>:call <SID>AutoloadcsQuickfixOpen()<CR>
+    silent! map <unique> <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR><CR>:call <SID>AutoloadcsQuickfixOpen()<CR>
+    silent! map <unique> <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR><CR>:call <SID>AutoloadcsQuickfixOpen()<CR>
+    silent! map <unique> <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR><CR>:call <SID>AutoloadcsQuickfixOpen()<CR>
+    silent! map <unique> <C-\>f :cs find f <C-R>=expand("<cword>")<CR><CR><CR>:call <SID>AutoloadcsQuickfixOpen()<CR>
+    silent! map <unique> <C-\>i :cs find i <C-R>=expand("<cword>")<CR><CR><CR>:call <SID>AutoloadcsQuickfixOpen()<CR>
     if has("menu")
       nmenu &Cscope.Find.Symbol<Tab><c-\\>s
         \ :cs find s <C-R>=expand("<cword>")<CR><CR>
@@ -103,8 +123,8 @@ function s:Cycle_macros_menus()
         \ :cs find f <C-R>=expand("<cword>")<CR><CR>
       nmenu &Cscope.Find.Including<Tab><c-\\>i
         \ :cs find i <C-R>=expand("<cword>")<CR><CR>
-"      nmenu &Cscope.Add :cs add 
-"      nmenu &Cscope.Remove  :cs kill 
+"      nmenu &Cscope.Add :cs add
+"      nmenu &Cscope.Remove  :cs kill
       nmenu &Cscope.Reset :cs reset<cr>
       nmenu &Cscope.Show :cs show<cr>
       " Need to figure out how to do the add/remove. May end up writing

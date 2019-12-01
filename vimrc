@@ -51,7 +51,7 @@ let g:tagbar_left=1
 let g:tagbar_width=30
 let g:tagbar_sort = 0
 let g:tagbar_compact = 1
-nmap <F7> :TagbarToggle<cr>
+nmap <F5> :TagbarToggle<cr>
 
 " nerdtree
 let NERDChristmasTree=0
@@ -61,7 +61,7 @@ let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 let NERDTreeShowBookmarks=1
 let NERDTreeWinPos = "right"
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-nmap <F6> :NERDTreeToggle<cr>
+nmap <F7> :NERDTreeToggle<cr>
 
 " airline
 let g:airline#extensions#tabline#enabled = 1
@@ -112,3 +112,7 @@ if has("cscope") && filereadable("/usr/bin/cscope")
     set cscopequickfix=s-,c-,d-,i-,t-,e-
 endif
 
+nmap <F3> :cp<cr>
+nmap <F4> :cn<cr>
+nmap <F6> :call AutoloadcsQuickfixToggle()<cr>
+nmap <F8> :silent !ctags -R --fields=+lS && cscope -Rbqk<cr>
