@@ -21,6 +21,7 @@ Bundle 'vim-scripts/DoxygenToolkit.vim'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'fatih/vim-go'
 Bundle 'dgryski/vim-godef'
+Bundle 'Blackrush/vim-gocode'
 
 filetype plugin indent on     " required!
 
