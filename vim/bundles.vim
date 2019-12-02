@@ -19,6 +19,7 @@ Bundle 'Yggdroot/indentLine'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'vim-scripts/DoxygenToolkit.vim'
 Bundle 'davidhalter/jedi-vim'
+Bundle 'fatih/vim-go'
 
 filetype plugin indent on     " required!
 
