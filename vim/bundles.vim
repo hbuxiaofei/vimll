@@ -20,6 +20,7 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'vim-scripts/DoxygenToolkit.vim'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'fatih/vim-go'
+Bundle 'dgryski/vim-godef'
 
 filetype plugin indent on     " required!
 
