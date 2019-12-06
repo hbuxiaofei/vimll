@@ -1,5 +1,5 @@
-autocmd BufNewFile *.sh,*.py exec ":call AutoSetFileHead()"
-function! AutoSetFileHead()
+autocmd BufNewFile *.sh,*.py exec ":call LeeAutoSetFileHead()"
+function! LeeAutoSetFileHead()
     if &filetype == 'sh'
         call setline(1, "\#!/bin/bash")
     elseif &filetype == 'python'
@@ -18,3 +18,12 @@ if ((filereadable("Kconfig"))&&(filereadable("Makefile")))
         set shiftwidth=8 |
         set noexpandtab
 endif
+
+function! LeeCtagsCscope()
+    if $filetype == 'go'
+        :silent !find . -name "*.go" >> cscope.files
+    elseif &filetype == 'python'
+        :silent !find . -name "*.py" >> cscope.files
+    endif
+    :silent !ctags -R --fields=+lS && cscope -Rbqk
+endfunction

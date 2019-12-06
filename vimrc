@@ -115,4 +115,4 @@ endif
 nmap <F3> :cp<cr>
 nmap <F4> :cn<cr>
 nmap <F6> :call AutoloadcsQuickfixToggle()<cr>
-nmap <F8> :silent !ctags -R --fields=+lS && cscope -Rbqk<cr>
+nmap <F8> :call LeeCtagsCscope()<cr>
