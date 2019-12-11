@@ -116,7 +116,7 @@ if !hasmapto('<Plug>MarkRegex', 'v')
 	vmap <unique> <silent> <leader>r <Plug>MarkRegex
 endif
 if !hasmapto('<Plug>MarkClear', 'n')
-	nmap <unique> <silent> <leader>n <Plug>MarkClear
+	nmap <unique> <silent> <leader>M <Plug>MarkClear
 endif
 
 nnoremap <silent> <Plug>MarkSet   :call
@@ -131,7 +131,7 @@ nnoremap <silent> <Plug>MarkClear :call
 	\ <sid>DoMark(<sid>CurrentMark())<cr>
 
 " Here is a sumerization of the following keys' behaviors:
-" 
+"
 " First of all, \#, \? and # behave just like \*, \/ and *, respectively,
 " except that \#, \? and # search backward.
 "
@@ -181,7 +181,7 @@ endfunction
 
 function! s:GetVisualSelectionEscaped(flags)
 	" flags:
-	"  "e" \  -> \\  
+	"  "e" \  -> \\
 	"  "n" \n -> \\n  for multi-lines visual selection
 	"  "N" \n removed
 	"  "V" \V added   for marking plain ^, $, etc.
