@@ -12,10 +12,11 @@ if [ -f /etc/vimrc ] && [ ! -f /etc/vimrc.bak ]; then
     touch /etc/vimrc
 fi
 
-rm -rf /root/.vim >/dev/null 2>&1
-rm -f /root/.vimrc >/dev/null 2>&1
-cp -rf vim /root/.vim
-cp -f vimrc /root/.vimrc
+rm -rf /$HOME/.vim >/dev/null 2>&1
+rm -f /$HOME/.vimrc >/dev/null 2>&1
+cp -rf vim /$HOME/.vim
+cp -f vimrc /$HOME/.vimrc
 
 echo -e "\033[32m- Install successfully...\033[0m"
+
 exit 0
