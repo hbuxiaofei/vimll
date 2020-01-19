@@ -20,12 +20,12 @@ nmap <F4> :cn<cr>
 nmap <F5> :TagbarToggle<cr>
 nmap <F6> :call AutoloadcsQuickfixToggle()<cr>
 nmap <F7> :NERDTreeToggle<cr>
-nmap <F8> :call LeeCtagsCscope()<cr>
+nmap <F8> :call LeeCtagsCscope()<cr>  :Create ctags and cscope.out files
 
-<C-p>  : List files
-<C-]>  : Go to function define, for c, c++ or golang
-<C-t>  : Go back position of stack, for c, c++ or golang
-<C-l>  : Code completion only for golang
+<C-p>  :List files
+<C-]>  :Go to function define, for c, c++ or golang
+<C-t>  :Go back position of stack, for c, c++ or golang
+<C-l>  :Code completion only for golang
 ```
 
 ### Leaders
@@ -40,14 +40,25 @@ nmap <leader>cu :NERDComUncommentLine<cr>
 
 nmap <leader>m :MarkSet<cr>
 nmap <leader>M :MarkClear<cr>
+```
 
-nmap <leader>n   :Go to function define, only for python
+## Jedi-vim
+```shell
+<leader>g :Goto assignments (typical goto function)
+<leader>d :Goto definitions (follow identifier as far as possible, includes imports and statements)
+K         :Show Documentation/Pydoc (shows a popup with assignments)
+<leader>r :Renaming
+<leader>n :Usages (shows all the usages of a name)
+Open module, e.g. :Pyimport os (opens the os module)
 ```
 
 ### Cscope
 ```shell
-<C-\>t  : Match string
-<C-\>s  : Match symbol exclude comment
+<C-\>s  : Find this C symbol
+<C-\>g  : Find this global definition
+<C-\>d  : Find functions called by this function
+<C-\>c  : Find functions calling this function
+<C-\>t  : Find this text string
 ```
 
 ### Command
