@@ -34,7 +34,7 @@ syntax on
 
 " colorscheme
 set t_Co=256
-colorscheme molokai
+" colorscheme molokai
 
 " remain screen after exsit
 set t_ti= t_te=
@@ -77,7 +77,7 @@ let g:ctrlp_match_window = 'min:1,max:15,results:100'
 " indentLine
 let g:indentLine_enable = 1
 let g:indentLine_char = '|'
-let g:indentLine_color_term = 239
+let g:indentLine_color_term = 253
 
 " nerdcommenter
 let g:NERDSpaceDelims = 1
