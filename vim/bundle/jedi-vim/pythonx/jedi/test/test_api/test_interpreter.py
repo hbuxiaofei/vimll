@@ -7,8 +7,8 @@ import pytest
 
 import jedi
 from jedi._compatibility import is_py3, py_version
-from jedi.evaluate.compiled import mixed, context
-from importlib import import_module
+from jedi.evaluate.compiled import mixed
+
 
 if py_version > 30:
     def exec_(source, global_map):
@@ -197,13 +197,7 @@ def test_getitem_side_effects():
     _assert_interpreter_complete('foo["asdf"].upper', locals(), ['upper'])
 
 
-@pytest.fixture(params=[False, True])
-def allow_descriptor_access_or_not(request, monkeypatch):
-    monkeypatch.setattr(jedi.Interpreter, '_allow_descriptor_getattr_default', request.param)
-    return request.param
-
-
-def test_property_error_oldstyle(allow_descriptor_access_or_not):
+def test_property_error_oldstyle():
     lst = []
     class Foo3:
         @property
@@ -215,14 +209,11 @@ def test_property_error_oldstyle(allow_descriptor_access_or_not):
     _assert_interpreter_complete('foo.bar', locals(), ['bar'])
     _assert_interpreter_complete('foo.bar.baz', locals(), [])
 
-    if allow_descriptor_access_or_not:
-        assert lst == [1, 1]
-    else:
-        # There should not be side effects
-        assert lst == []
+    # There should not be side effects
+    assert lst == []
 
 
-def test_property_error_newstyle(allow_descriptor_access_or_not):
+def test_property_error_newstyle():
     lst = []
     class Foo3(object):
         @property
@@ -234,25 +225,10 @@ def test_property_error_newstyle(allow_descriptor_access_or_not):
     _assert_interpreter_complete('foo.bar', locals(), ['bar'])
     _assert_interpreter_complete('foo.bar.baz', locals(), [])
 
-    if allow_descriptor_access_or_not:
-        assert lst == [1, 1]
-    else:
-        # There should not be side effects
-        assert lst == []
+    # There should not be side effects
+    assert lst == []
 
 
-def test_property_content():
-    class Foo3(object):
-        @property
-        def bar(self):
-            return 1
-
-    foo = Foo3()
-    def_, = jedi.Interpreter('foo.bar', [locals()]).goto_definitions()
-    assert def_.name == 'int'
-
-
-@pytest.mark.skipif(sys.version_info[0] == 2, reason="Ignore Python 2, because EOL")
 def test_param_completion():
     def foo(bar):
         pass
@@ -299,7 +275,6 @@ def test_completion_param_annotations():
     assert d.name == 'bytes'
 
 
-@pytest.mark.skipif(sys.version_info[0] == 2, reason="Ignore Python 2, because EOL")
 def test_keyword_argument():
     def f(some_keyword_argument):
         pass
@@ -464,44 +439,3 @@ def test__wrapped__():
     c, = jedi.Interpreter('syslogs_to_df', [locals()]).completions()
     # Apparently the function starts on the line where the decorator starts.
     assert c.line == syslogs_to_df.__wrapped__.__code__.co_firstlineno + 1
-
-
-@pytest.mark.parametrize('module_name', ['sys', 'time'])
-def test_core_module_completes(module_name):
-    module = import_module(module_name)
-    assert jedi.Interpreter(module_name + '.\n', [locals()]).completions()
-
-
-@pytest.mark.skipif(sys.version_info[0] == 2, reason="Ignore Python 2, because EOL")
-@pytest.mark.parametrize(
-    'code, expected, index', [
-        ('a(', ['a', 'b', 'c'], 0),
-        ('b(', ['b', 'c'], 0),
-        # Might or might not be correct, because c is given as a keyword
-        # argument as well, but that is just what inspect.signature returns.
-        ('c(', ['b', 'c'], 0),
-    ]
-)
-def test_partial_signatures(code, expected, index):
-    import functools
-
-    def func(a, b, c):
-        pass
-
-    a = functools.partial(func)
-    b = functools.partial(func, 1)
-    c = functools.partial(func, 1, c=2)
-
-    sig, = jedi.Interpreter(code, [locals()]).call_signatures()
-    assert sig.name == 'partial'
-    assert [p.name for p in sig.params] == expected
-    assert index == sig.index
-
-
-@pytest.mark.skipif(sys.version_info[0] == 2, reason="Ignore Python 2, because EOL")
-def test_type_var():
-    """This was an issue before, see Github #1369"""
-    import typing
-    x = typing.TypeVar('myvar')
-    def_, = jedi.Interpreter('x', [locals()]).goto_definitions()
-    assert def_.name == 'TypeVar'

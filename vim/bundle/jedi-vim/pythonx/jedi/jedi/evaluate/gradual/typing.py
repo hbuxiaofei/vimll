@@ -10,7 +10,7 @@ from jedi import debug
 from jedi.evaluate.cache import evaluator_method_cache
 from jedi.evaluate.compiled import builtin_from_name
 from jedi.evaluate.base_context import ContextSet, NO_CONTEXTS, Context, \
-    iterator_to_context_set, ContextWrapper, LazyContextWrapper
+    iterator_to_context_set, HelperContextMixin, ContextWrapper
 from jedi.evaluate.lazy_context import LazyKnownContexts
 from jedi.evaluate.context.iterable import SequenceLiteralContext
 from jedi.evaluate.arguments import repack_with_argument_clinic
@@ -209,9 +209,6 @@ class _TypingClassMixin(object):
             self.evaluator.builtins_module.py__getattribute__('object')
         )]
 
-    def get_metaclasses(self):
-        return []
-
 
 class TypingClassContextWithIndex(_TypingClassMixin, TypingContextWithIndex, ClassMixin):
     pass
@@ -244,9 +241,9 @@ def _iter_over_arguments(maybe_tuple_context, defining_context):
         yield ContextSet(resolve_forward_references(context_set))
 
 
-class TypeAlias(LazyContextWrapper):
-    def __init__(self, parent_context, origin_tree_name, actual):
-        self.evaluator = parent_context.evaluator
+class TypeAlias(HelperContextMixin):
+    def __init__(self, evaluator, parent_context, origin_tree_name, actual):
+        self.evaluator = evaluator
         self.parent_context = parent_context
         self._origin_tree_name = origin_tree_name
         self._actual = actual  # e.g. builtins.list
@@ -258,10 +255,14 @@ class TypeAlias(LazyContextWrapper):
     def py__name__(self):
         return self.name.string_name
 
+    def __getattr__(self, name):
+        return getattr(self._get_type_alias_class(), name)
+
     def __repr__(self):
         return '<%s: %s>' % (self.__class__.__name__, self._actual)
 
-    def _get_wrapped_context(self):
+    @evaluator_method_cache()
+    def _get_type_alias_class(self):
         module_name, class_name = self._actual.split('.')
         if self.evaluator.environment.version_info.major == 2 and module_name == 'builtins':
             module_name = '__builtin__'

@@ -84,14 +84,9 @@ def safe_getattr(obj, name, default=_sentinel):
             raise
         return default
     else:
-        if isinstance(attr, ALLOWED_DESCRIPTOR_ACCESS):
+        if type(attr) in ALLOWED_DESCRIPTOR_ACCESS:
             # In case of descriptors that have get methods we cannot return
             # it's value, because that would mean code execution.
-            # Since it's an isinstance call, code execution is still possible,
-            # but this is not really a security feature, but much more of a
-            # safety feature. Code execution is basically always possible when
-            # a module is imported. This is here so people don't shoot
-            # themselves in the foot.
             return getattr(obj, name)
     return attr
 
@@ -178,18 +173,6 @@ def create_access_path(evaluator, obj):
 
 def _force_unicode_decorator(func):
     return lambda *args, **kwargs: force_unicode(func(*args, **kwargs))
-
-
-def get_api_type(obj):
-    if inspect.isclass(obj):
-        return u'class'
-    elif inspect.ismodule(obj):
-        return u'module'
-    elif inspect.isbuiltin(obj) or inspect.ismethod(obj) \
-            or inspect.ismethoddescriptor(obj) or inspect.isfunction(obj):
-        return u'function'
-    # Everything else...
-    return u'instance'
 
 
 class DirectObjectAccess(object):
@@ -345,16 +328,12 @@ class DirectObjectAccess(object):
     def getattr_paths(self, name, default=_sentinel):
         try:
             return_obj = getattr(self._obj, name)
-        except Exception as e:
+        except AttributeError:
+            # Happens e.g. in properties of
+            # PyQt4.QtGui.QStyleOptionComboBox.currentText
+            # -> just set it to None
             if default is _sentinel:
-                if isinstance(e, AttributeError):
-                    # Happens e.g. in properties of
-                    # PyQt4.QtGui.QStyleOptionComboBox.currentText
-                    # -> just set it to None
-                    raise
-                # Just in case anything happens, return an AttributeError. It
-                # should not crash.
-                raise AttributeError
+                raise
             return_obj = default
         access = self._create_access(return_obj)
         if inspect.ismodule(return_obj):
@@ -373,7 +352,16 @@ class DirectObjectAccess(object):
         raise ValueError("Object is type %s and not simple" % type(self._obj))
 
     def get_api_type(self):
-        return get_api_type(self._obj)
+        obj = self._obj
+        if self.is_class():
+            return u'class'
+        elif inspect.ismodule(obj):
+            return u'module'
+        elif inspect.isbuiltin(obj) or inspect.ismethod(obj) \
+                or inspect.ismethoddescriptor(obj) or inspect.isfunction(obj):
+            return u'function'
+        # Everything else...
+        return u'instance'
 
     def get_access_path_tuples(self):
         accesses = [create_access(self._evaluator, o) for o in self._get_objects_path()]
