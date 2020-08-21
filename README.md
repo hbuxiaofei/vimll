@@ -55,10 +55,10 @@ Open module, e.g. :Pyimport os (opens the os module)
 ### Cscope
 ```shell
 <C-\>s  : Find this C symbol
+<C-\>t  : Find this text string
 <C-\>g  : Find this global definition
 <C-\>d  : Find functions called by this function
 <C-\>c  : Find functions calling this function
-<C-\>t  : Find this text string
 ```
 
 ### Command
