@@ -1,4 +1,4 @@
-# The LeeLei vimrc configuration
+# Vimll
 
 This is a distribution of vim plugins for CentOS8.x or later, supporting language c, c++, python, golang  and shell.
 
