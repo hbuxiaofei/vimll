@@ -31,6 +31,7 @@ set ffs=unix,dos,mac
 
 " enable syntax hightlight and completion
 syntax on
+set completeopt=menu
 
 " colorscheme
 set t_Co=256
