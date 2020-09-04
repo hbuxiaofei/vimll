@@ -43,6 +43,9 @@ set t_ti= t_te=
 " always show the status line - use 2 lines for the status bar
 set laststatus=2
 
+" golang
+let g:go_version_warning = 0
+
 " neocomplcache
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_auto_select = 0

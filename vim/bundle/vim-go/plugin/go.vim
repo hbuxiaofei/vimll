@@ -40,28 +40,7 @@ call s:checkVersion()
 
 " NOTE(bc): varying the binary name and the tail of the import path (e.g.
 " gocode-gomod) does not yet work in module aware mode.
-let s:packages = {
-      \ 'asmfmt':        ['github.com/klauspost/asmfmt/cmd/asmfmt@master'],
-      \ 'dlv':           ['github.com/go-delve/delve/cmd/dlv@master'],
-      \ 'errcheck':      ['github.com/kisielk/errcheck@master'],
-      \ 'fillstruct':    ['github.com/davidrjenni/reftools/cmd/fillstruct@master'],
-      \ 'gocode':        ['github.com/mdempsky/gocode@master', {'windows': ['-ldflags', '-H=windowsgui']}],
-      \ 'gocode-gomod':  ['github.com/stamblerre/gocode'],
-      \ 'godef':         ['github.com/rogpeppe/godef@master'],
-      \ 'gogetdoc':      ['github.com/zmb3/gogetdoc@master'],
-      \ 'goimports':     ['golang.org/x/tools/cmd/goimports@master'],
-      \ 'golint':        ['golang.org/x/lint/golint@master'],
-      \ 'gopls':         ['golang.org/x/tools/gopls@latest', {}, {'after': function('go#lsp#Restart', [])}],
-      \ 'golangci-lint': ['github.com/golangci/golangci-lint/cmd/golangci-lint@master'],
-      \ 'gomodifytags':  ['github.com/fatih/gomodifytags@master'],
-      \ 'gorename':      ['golang.org/x/tools/cmd/gorename@master'],
-      \ 'gotags':        ['github.com/jstemmer/gotags@master'],
-      \ 'guru':          ['golang.org/x/tools/cmd/guru@master'],
-      \ 'impl':          ['github.com/josharian/impl@master'],
-      \ 'keyify':        ['honnef.co/go/tools/cmd/keyify@master'],
-      \ 'motion':        ['github.com/fatih/motion@master'],
-      \ 'iferr':         ['github.com/koron/iferr@master'],
-\ }
+let s:packages = {}
 
 " These commands are available on any filetypes
 command! -nargs=* -complete=customlist,s:complete GoInstallBinaries call s:GoInstallBinaries(-1, <f-args>)

@@ -1,7 +1,3 @@
-" au! filetype go inoremap <buffer> . .<C-x><C-o>
-" ctrl-l auto complete for golang
-au! BufRead,BufNewFile *.go imap <C-l> <C-x><C-o>
-
 autocmd BufNewFile *.sh,*.py exec ":call LeeAutoSetFileHead()"
 function! LeeAutoSetFileHead()
     if &filetype == 'sh'
