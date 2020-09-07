@@ -1,3 +1,14 @@
+" To force clearing the undo information
+" From MANUAL of undo
+function! LLvimWriteWithCleareUndo()
+  let s:old_undolevels = &undolevels
+  set undolevels=-1
+  exe "normal a \<BS>\<Esc>"
+  let &undolevels = s:old_undolevels
+  unlet s:old_undolevels
+endfunction
+com! -bar WW cal LLvimWriteWithCleareUndo()
+
 autocmd BufNewFile *.sh,*.py exec ":call LeeAutoSetFileHead()"
 function! LeeAutoSetFileHead()
     if &filetype == 'sh'
