@@ -6,6 +6,7 @@ function! LLvimWriteWithCleareUndo()
   exe "normal a \<BS>\<Esc>"
   let &undolevels = s:old_undolevels
   unlet s:old_undolevels
+  exe "w"
 endfunction
 com! -bar WW cal LLvimWriteWithCleareUndo()
 
