@@ -80,8 +80,9 @@ let g:ctrlp_match_window = 'min:1,max:15,results:100'
 
 " indentLine
 let g:indentLine_enable = 1
-let g:indentLine_char = '|'
-let g:indentLine_color_term = 253
+let g:indentLine_char = '¦'
+let g:indentLine_color_gui = '#A4E57E'
+let g:indentLine_color_term = 239
 
 " nerdcommenter
 let g:NERDSpaceDelims = 1
