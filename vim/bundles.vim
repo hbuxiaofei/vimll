@@ -21,6 +21,9 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'vim-scripts/DoxygenToolkit.vim'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'fatih/vim-go'
+Bundle 'vim-scripts/DrawIt'
+Bundle 'aklt/plantuml-syntax'
+Bundle 'weirongxu/plantuml-previewer.vim'
 
 filetype plugin indent on     " required!
 
