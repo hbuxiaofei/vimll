@@ -114,7 +114,7 @@ autocmd BufWritePre * call StripTrailingWhitespace()
 autocmd BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
 if has("cscope") && filereadable("/usr/bin/cscope")
-    set cscopequickfix=s-,c-,d-,i-,t-,e-
+    set cscopequickfix=s-,c-,d-,i-,t-,e-,g-
 endif
 
 nmap <F3> :cp<cr>

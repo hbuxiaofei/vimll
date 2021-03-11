@@ -66,7 +66,7 @@ if !exists("g:is_autoloadcs_quickfix_open")
 endif
 
 function s:AutoloadcsQuickfixOpen()
-    cwindow 5
+    cwindow 10
     let s:is_autoloadcs_quickfix_open = 1
 endfunction
 
@@ -75,7 +75,7 @@ function AutoloadcsQuickfixToggle()
         cclose
         let s:is_autoloadcs_quickfix_open = 0
     else
-        cwindow 5
+        cwindow 10
         let s:is_autoloadcs_quickfix_open = 1
     endif
 endfunction
