@@ -78,6 +78,10 @@ nmap <Leader>+ :bd<cr>
 let g:ctrlp_working_path_mode = 'wa'
 let g:ctrlp_match_window = 'min:1,max:15,results:100'
 
+" ag.vim
+let g:ag_prg = "rg --column -e"
+noremap <Leader>fa :<C-U><C-R>=printf("Ag \"%s\"", expand("<cword>"))<CR>
+
 " indentLine
 let g:indentLine_enable = 1
 let g:indentLine_char = '¦'
