@@ -33,9 +33,12 @@ set ffs=unix,dos,mac
 syntax on
 set completeopt=menu
 
+" hightlight current line
+set cursorline
+
 " colorscheme
-set t_Co=256
-" colorscheme molokai
+colorscheme monokai
+" set t_Co=256
 
 " remain screen after exsit
 set t_ti= t_te=
