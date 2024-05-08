@@ -10,7 +10,6 @@ cd $(dirname $0)
 
 echo -e "\033[32m- [Info] Start to copy files\033[0m"
 
-
 if [ -f /etc/vim/vimrc ] && [ ! -f /etc/vim/vimrc.bak ]; then
     mv /etc/vim/vimrc /etc/vim/vimrc.bak
     touch /etc/vim/vimrc
