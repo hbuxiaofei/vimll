@@ -37,7 +37,7 @@ set completeopt=menu
 set cursorline
 
 " colorscheme
-colorscheme monokai
+colorscheme molokai
 " set t_Co=256
 
 " remain screen after exsit
