@@ -68,14 +68,14 @@ let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 let NERDTreeShowBookmarks=1
 let NERDTreeWinPos = "right"
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-nmap <F7> :NERDTreeToggle<cr>
+nmap <silent> <F7> :call LeevimNERDTreeToggle()<CR>
 
 " airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 nmap <leader>- <Plug>AirlineSelectPrevTab
 nmap <leader>= <Plug>AirlineSelectNextTab
-nmap <Leader>+ :bd<cr>
+nmap <silent> <leader>+ :call LeevimAirlineBufferClose()<CR>
 
 " ctrlp
 let g:ctrlp_working_path_mode = 'wa'

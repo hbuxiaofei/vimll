@@ -39,3 +39,25 @@ function! LeeCtagsCscope()
     endif
     :silent !ctags -R --fields=+lS && cscope -Rbqk
 endfunction
+
+let s:nerdtree_buffer_number = 0
+function! LeevimNERDTreeToggle()
+  if g:NERDTree.IsOpen()
+    exec "NERDTreeToggle"
+    let s:nerdtree_buffer_number = buffer_number()
+  else
+    exec "NERDTreeFind"
+    let s:nerdtree_buffer_number = 0
+  endif
+endfunction
+
+function! LeevimAirlineBufferClose()
+  let l:buffer_cur_number = buffer_number()
+  if g:NERDTree.IsOpen()
+    if l:buffer_cur_number == s:nerdtree_buffer_number
+      return
+    endif
+  endif
+  exe "bn"
+  exe "bd " . l:buffer_cur_number
+endfunction
