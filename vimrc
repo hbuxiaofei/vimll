@@ -38,7 +38,7 @@ set cursorline
 
 " colorscheme
 colorscheme molokai
-" set t_Co=256
+set t_Co=256
 
 " remain screen after exsit
 set t_ti= t_te=
