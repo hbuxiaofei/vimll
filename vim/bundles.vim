@@ -22,8 +22,6 @@ Bundle 'vim-scripts/DoxygenToolkit.vim'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'fatih/vim-go'
 Bundle 'vim-scripts/DrawIt'
-Bundle 'aklt/plantuml-syntax'
-Bundle 'weirongxu/plantuml-previewer.vim'
 Bundle 'octol/vim-cpp-enhanced-highlight'
 
 filetype plugin indent on     " required!
