@@ -97,6 +97,27 @@ let g:NERDSpaceDelims = 1
 " doxygentoolkit
 let g:DoxygenToolkit_briefTag_funcName = "yes"
 
+" gtags
+" https://ftp.gnu.org/pub/gnu/global/global-6.6.10.tar.gz
+if filereadable("GTAGS")
+    " To ignore letter case when searching:
+    let GtagsCscope_Ignore_Case = 1
+    " To use absolute path name:
+    let GtagsCscope_Absolute_Path = 1
+    " To deterring interruption:
+    let GtagsCscope_Keep_Alive = 1
+    " If you hope auto loading:
+    let GtagsCscope_Auto_Load = 1
+    " To use 'vim -t ', ':tag' and '<C-]>'
+    set cscopetag
+    " set cscopequickfix=s-,c-,d-,i-,t-,e-,g-
+    set cscopequickfix=s-,c-,d-,i-,t-,e-
+else
+    if has("cscope") && filereadable("/usr/bin/cscope")
+        set cscopequickfix=s-,c-,d-,i-,t-,e-,g-
+    endif
+endif
+
 function! ReplaceTab()
 	if !&binary && &filetype != 'diff'
 		:%ret! 4
@@ -119,10 +140,6 @@ endfunction
 autocmd BufWritePre * call StripTrailingWhitespace()
 
 autocmd BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
-
-if has("cscope") && filereadable("/usr/bin/cscope")
-    set cscopequickfix=s-,c-,d-,i-,t-,e-,g-
-endif
 
 nmap <F3> :cp<cr>
 nmap <F4> :cn<cr>
