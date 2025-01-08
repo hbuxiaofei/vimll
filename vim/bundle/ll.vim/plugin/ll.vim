@@ -23,12 +23,8 @@ function! LeeAutoSetFileHead()
     normal o
 endfunction
 
-if ((filereadable("Kconfig"))&&(filereadable("Makefile")))
-    au! BufRead *.c,*.cpp |
-        set tabstop=8 |
-        set softtabstop=8 |
-        set shiftwidth=8 |
-        set noexpandtab
+if filereadable("Kconfig") && filereadable("Kbuild")
+    autocmd BufReadPost *.c,*.cpp set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
 endif
 
 function! LeeCtagsCscope()
