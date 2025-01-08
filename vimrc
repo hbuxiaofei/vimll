@@ -16,6 +16,10 @@ set tabstop=4       " tab width
 set softtabstop=4   " backspace
 set shiftwidth=4    " indent width
 set expandtab       " use space when <Tab>
+
+" :N  Place case labels N characters from the indent of the switch(). (default 'shiftwidth').
+set cinoptions=:0
+
 set colorcolumn=80
 set backspace=indent,eol,start
 
