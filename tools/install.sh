@@ -334,7 +334,6 @@ install_zellij() {
     local exename="zellij"
     local bindir=""
     if command -v ${exename} >/dev/null 2>&1; then
-        __config_zellij
         return 0
     fi
 
@@ -361,12 +360,97 @@ install_zellij() {
     __config_zellij
 }
 
+__download_neovim()
+{
+    local version="v0.11.1"
+    local neovim_name="nvim-linux-x86_64"
+    local neovim_tarball="${neovim_name}.tar.gz"
+    local neovim_url="https://github.com/neovim/neovim/releases/download/${version}/${neovim_tarball}"
+    if [ -e "$neovim_tarball" ]; then
+        return 0
+    fi
+
+    if command -v mwget >/dev/null 2>&1; then
+        mwget -n 10 $neovim_url
+    else
+        if command -v wget >/dev/null 2>&1; then
+            wget $neovim_url
+        else
+            pr_err "wget: command not found"
+            return 1
+        fi
+    fi
+
+    if [ $? -ne 0 ] || [ ! -e "$neovim_tarball" ]; then
+        pr_err "get stable neovim error"
+        return 1
+    fi
+}
+__check_neovim_conflict()
+{
+    local neovim_name="nvim-linux-x86_64"
+    local neovim_tarball="${neovim_name}.tar.gz"
+    local tempfile=$(mktemp -t temp.XXXXXX)
+    local _line=""
+    local _ok="false"
+    local is_conflict=0
+    if [ ! -e "$neovim_tarball" ]; then
+        pr_err "$neovim_tarball not found"
+        rm -f $tempfile
+        return 1
+    fi
+
+    tar -tf $neovim_tarball > $tempfile
+    if [ $? -ne 0 ]; then
+        pr_err "$neovim_tarball decompression failed"
+        rm -f $tempfile
+        return 1
+    fi
+
+    sed -i "s#^${neovim_name}#/usr#g" $tempfile
+    sed -i '/.*\/$/d' $tempfile
+
+    while read _line; do
+        if [ -n "$_line" ] && [ -e "$_line" ] ; then
+            echo -e "\033[33m- [Warn] file $_line conflict\033[0m"
+            is_conflict=1
+        fi
+
+        if [ x"$_line" == x"/usr/bin/nvim" ]; then
+            _ok="true"
+        fi
+    done  < $tempfile
+
+    rm -f $tempfile
+
+    if [ x"$_ok" != x"true" ]; then
+        pr_err "$neovim_tarball seems not be complete"
+        return 1
+    fi
+
+    return $is_conflict
+}
+
+install_neovim() {
+    local exename="nvim"
+    local neovim_name="nvim-linux-x86_64"
+    local neovim_tarball="${neovim_name}.tar.gz"
+
+    if command -v ${exename} >/dev/null 2>&1; then
+        return 0
+    fi
+    __download_neovim || return 1
+    __check_neovim_conflict || return 1
+    tar -xf $neovim_tarball --strip-components 1 -C /usr/ || return 1
+}
+
 [ ! -d $USRLOCAL_BIN ] && mkdir -p $USRLOCAL_BIN
 
 pushd $USRLOCAL_BIN
     install_ripgrep
     install_uv
     install_zellij
+    # install_neovim // Required GLIBC_2.34 later
 popd
 
 exit 0
