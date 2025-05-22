@@ -444,11 +444,47 @@ install_neovim() {
     tar -xf $neovim_tarball --strip-components 1 -C /usr/ || return 1
 }
 
+# https://github.com/sharkdp/bat
+# alias cat='bat -pp'
+install_bat() {
+    local version="v0.25.0"
+    local filename="bat-${version}-x86_64-unknown-linux-musl"
+    local filetarball="${filename}.tar.gz"
+    local exename="bat"
+    local bindir=""
+
+    if command -v ${exename} >/dev/null 2>&1; then
+        return 0
+    fi
+
+    [ -d /bin ] && bindir="/bin"
+    [ -d /usr/bin ] && bindir="/usr/bin"
+    [ -d /usr/local/bin ] && bindir="/usr/local/bin"
+
+    if [ -z "$bindir" ]; then
+        pr_warn "${FUNCNAME[0]} binary directory not found"
+        return 1
+    fi
+
+    if [ ! -e "${filetarball}" ]; then
+        wget https://github.com/sharkdp/bat/releases/download/${version}/${filetarball}
+    fi
+    tar -xf ${filetarball} --strip-components 1 --directory=${bindir} ${filename}/${exename}
+
+    chmod +x ${bindir}/${exename}
+
+    if ! command -v ${exename} >/dev/null 2>&1; then
+        pr_warn "${FUNCNAME[0]} failed"
+        return 1
+    fi
+}
+
 [ ! -d $USRLOCAL_BIN ] && mkdir -p $USRLOCAL_BIN
 
 pushd $USRLOCAL_BIN
     install_ripgrep
     install_uv
+    install_bat
     install_zellij
     # install_neovim // Required GLIBC_2.34 later
 popd
