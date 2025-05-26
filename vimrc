@@ -50,6 +50,9 @@ set t_ti= t_te=
 " always show the status line - use 2 lines for the status bar
 set laststatus=2
 
+" leader:'\' map to Space
+let mapleader = " "
+
 " tagbar
 let g:tagbar_left=1
 let g:tagbar_width=30
