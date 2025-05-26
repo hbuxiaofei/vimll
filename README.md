@@ -42,16 +42,6 @@ nmap <leader>m :MarkSet<cr>
 nmap <leader>M :MarkClear<cr>
 ```
 
-## Jedi-vim
-```shell
-<leader>g :Goto assignments (typical goto function)
-<leader>d :Goto definitions (follow identifier as far as possible, includes imports and statements)
-K         :Show Documentation/Pydoc (shows a popup with assignments)
-<leader>r :Renaming
-<leader>n :Usages (shows all the usages of a name)
-Open module, e.g. :Pyimport os (opens the os module)
-```
-
 ### Cscope
 ```shell
 <C-\>s  : Find this C symbol
