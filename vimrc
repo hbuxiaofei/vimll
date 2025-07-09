@@ -73,9 +73,9 @@ nmap <silent> <F7> :call LeevimNERDTreeToggle()<CR>
 " airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
-nmap <leader>- <Plug>AirlineSelectPrevTab
-nmap <leader>= <Plug>AirlineSelectNextTab
-nmap <silent> <leader>+ :call LeevimAirlineBufferClose()<CR>
+nmap - <Plug>AirlineSelectPrevTab
+nmap = <Plug>AirlineSelectNextTab
+nmap <silent> + :call LeevimAirlineBufferClose()<CR>
 
 " ctrlp
 let g:ctrlp_working_path_mode = 'wa'
