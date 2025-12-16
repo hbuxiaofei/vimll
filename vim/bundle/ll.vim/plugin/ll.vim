@@ -40,7 +40,7 @@ let s:nerdtree_buffer_number = 0
 function! LeevimNERDTreeToggle()
   if g:NERDTree.IsOpen()
     exec "NERDTreeToggle"
-    let s:nerdtree_buffer_number = buffer_number()
+    let s:nerdtree_buffer_number = exists('*bufnr') ? bufnr('%') : bufnr()
   else
     exec "NERDTreeFind"
     let s:nerdtree_buffer_number = 0
@@ -48,7 +48,7 @@ function! LeevimNERDTreeToggle()
 endfunction
 
 function! LeevimAirlineBufferClose()
-  let l:buffer_cur_number = buffer_number()
+  let l:buffer_cur_number = exists('*bufnr') ? bufnr('%') : bufnr()
   if g:NERDTree.IsOpen()
     if l:buffer_cur_number == s:nerdtree_buffer_number
       return
