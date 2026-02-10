@@ -50,6 +50,9 @@ set t_ti= t_te=
 " always show the status line - use 2 lines for the status bar
 set laststatus=2
 
+" displays incomplete commands in the status line
+set showcmd
+
 " leader:'\' map to Space
 let mapleader = " "
 
