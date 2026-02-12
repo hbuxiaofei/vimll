@@ -97,8 +97,14 @@ let g:indentLine_color_term = 239
 " nerdcommenter
 let g:NERDSpaceDelims = 1
 
-" doxygentoolkit
-let g:DoxygenToolkit_briefTag_funcName = "yes"
+" vim-bookmarks
+let g:bookmark_no_default_key_mappings = 1
+let g:bookmark_show_toggle_warning = 0
+let g:bookmark_save_per_working_dir = 1
+nmap <Leader>mm <Plug>BookmarkToggle
+nmap <Leader>mi <Plug>BookmarkAnnotate
+nmap <Leader>ma <Plug>BookmarkShowAll
+nmap <Leader>mx <Plug>BookmarkClearAll
 
 " gtags
 " https://ftp.gnu.org/pub/gnu/global/global-6.6.10.tar.gz
