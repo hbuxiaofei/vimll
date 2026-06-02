@@ -41,6 +41,7 @@ set completeopt=menu
 set cursorline
 
 " colorscheme
+" colorscheme github
 colorscheme molokai
 set t_Co=256
 
