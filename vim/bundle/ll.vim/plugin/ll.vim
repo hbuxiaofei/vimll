@@ -67,7 +67,7 @@ function! LeevimAirlineCloseBuffer()
   else
     bnext
   endif
-  execute 'silent! bwipeout ' . l:current
+  execute 'silent! bdelete ' . l:current
 
   if exists('g:airline_buflist_cache')
     unlet g:airline_buflist_cache
@@ -97,7 +97,7 @@ function! LeevimAirlineCloseOtherBuffers()
     endif
 
     if l:buf.loaded || l:buf.listed
-      silent! execute 'bwipeout! ' . l:bufnr
+      silent! execute 'bdelete! ' . l:bufnr
     endif
   endfor
 
