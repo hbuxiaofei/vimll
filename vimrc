@@ -79,8 +79,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 nmap - <Plug>AirlineSelectPrevTab
 nmap = <Plug>AirlineSelectNextTab
-nmap <silent> _ :call LeevimAirlineCloseBuffer()<CR>
-nmap <silent> + :call LeevimAirlineCloseOtherBuffers()<CR>
+nmap <silent> + :call LeevimAirlineCloseBuffer()<CR>
+nmap <silent> _ :call LeevimAirlineCloseOtherBuffers()<CR>
 
 " ctrlp
 let g:ctrlp_working_path_mode = 'wa'
